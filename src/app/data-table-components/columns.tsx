@@ -17,22 +17,25 @@ export const columns: ColumnDef<Expense>[] = [
       <div className="w-[150px] capitalize">{row.getValue("label")}</div>
     ),
     enableSorting: false,
-    enableHiding: false
+    enableHiding: false,
   },
   {
     accessorKey: "note",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Note" />
     ),
+    // inside table
     cell: ({ row }) => {
       return (
-        <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate capitalize font-medium">
-            {row.getValue("note")}
-          </span>
-        </div>
+        <>
+          <div className="flex space-x-2">
+            <span className="max-w-[500px] truncate capitalize font-medium">
+              {row.getValue("note")}
+            </span>
+          </div>
+        </>
       );
-    }
+    },
   },
   {
     accessorKey: "category",
@@ -48,7 +51,7 @@ export const columns: ColumnDef<Expense>[] = [
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
-    }
+    },
   },
   {
     accessorKey: "type",
@@ -70,7 +73,7 @@ export const columns: ColumnDef<Expense>[] = [
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
-    }
+    },
   },
   {
     accessorKey: "amount",
@@ -95,7 +98,7 @@ export const columns: ColumnDef<Expense>[] = [
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
-    }
+    },
   },
   {
     accessorKey: "date",
@@ -107,7 +110,7 @@ export const columns: ColumnDef<Expense>[] = [
       const formattedDate = date.toLocaleDateString("en-US", {
         day: "2-digit",
         month: "short",
-        year: "numeric"
+        year: "numeric",
       });
       return (
         <div className="flex w-[100px] items-center">
@@ -119,10 +122,10 @@ export const columns: ColumnDef<Expense>[] = [
       const rowDate = new Date(row.getValue(id));
       const [startDate, endDate] = value;
       return rowDate >= startDate && rowDate <= endDate;
-    }
+    },
   },
   {
     id: "actions",
-    cell: ({ row }) => <DataTableRowActions row={row} />
-  }
+    cell: ({ row }) => <DataTableRowActions row={row} />,
+  },
 ];
